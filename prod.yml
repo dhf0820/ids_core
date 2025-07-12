@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  core: 
+    image: vertisoft/ids_core:250712.0 # Use the latest stable version of the core service
+    # Uncomment the following lines to use a specific version of the core service
+    # Note: Uncomment only one of the following lines to spe:cify a version
+    #restart: never:
+    environment:
+      BASEURL: "http://localhost:50500/"
+      MODE: docker
+      LISTEN_PORT: 9200
+      COMPANY: test
+      CORE_DATABASE: test
+      TOKEN_DURATION: 120m
+      SERVICE_NAME: core
+      CONFIG_VERSION: yawlDocker 
+      REFRESH_SECRET: "Debbie loves me more"
+      ACCESS_SECRET: "I am so blessed Debbie loves me!"
+      CORE_DB: mongodb+srv://dhfadmin:Sacj0nhati@cluster1.24b12.mongodb.net/test?retryWrites=true&w=majority
+      DEBUG_LEVEL: "DEBUG2"
+      PORT: 50100
+      #EXTRACTOR: "http://yawl:30300/system/661078c1eaddb0461d932108/Extractor"
+      EXTRACTOR: "https://guitest.universalcharts.com/testcore"
+      #EXTRACTOR: "https://4c31-39-58-39-246.ngrok-free.app/testcore"
+      PER_PAGE: 50
+    ports:
+      - "0.0.0.0:50100:9200"
+
+    volumes:
+      - core-data:/data
+    networks:
+     # - uc_net
+      #- host
+      #- vs_web
+      - uc_attachable
+volumes:
+  #core-data:
+  core-data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /Users/dhf/work/development/go/src/ids_new/data
+      o: bind
+networks:
+  #uc_net:
+#  host:
+#    external: true
+  #vs_web:
+  uc_attachable:
+    external: true

@@ -1,0 +1,5 @@
+#docker service rmids_core
+make build TAG=250712.0
+docker stack deploy -c prod.yml vs
+docker service logs ids_core  -n all -f
+
