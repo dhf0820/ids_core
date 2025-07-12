@@ -1,7 +1,7 @@
 version: "3.7"
 services:
   core: 
-    image: vertisoft/ids_core:250712.0 # Use the latest stable version of the core service
+    image: vertisoft/ids_core:250712.1 # Use the latest stable version of the core service
     # Uncomment the following lines to use a specific version of the core service
     # Note: Uncomment only one of the following lines to spe:cify a version
     #restart: never:
