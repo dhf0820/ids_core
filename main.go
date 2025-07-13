@@ -35,8 +35,8 @@ var CurrentSystem = &SystemConfig{}
 var CurrentService = &ServiceConfig{}
 var CurrentUser = &User{}
 var JWTPayload = &golangJWT.UcPayload{}
-var Version = "250713.50.0"
-var CodeVersion = "250713.50.0"
+var Version = "250713.0"
+var CodeVersion = "250713.0"
 var RunEnv = &RunTimeConfig{}
 var ServiceName string
 var Company string
