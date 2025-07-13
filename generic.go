@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 	"runtime"
-	"time"
+	//"time"
 )
 
 var dest = os.Stdout
@@ -23,8 +23,9 @@ func VsLog(mode, msg string) {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	//t := time.Now()
+	//tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
 	fmt.Printf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 	//fmt.Printf(VsLogMsg(mode, msg))
 	mode = mode + " "
@@ -45,8 +46,9 @@ func VsLogErr(msg string) string {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	//t := time.Now()
+	//tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
 	return fmt.Sprintf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 }
 
@@ -56,8 +58,9 @@ func VsLogMsg(mode, msg string) string {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	//t := time.Now()
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
+	//tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
 	return fmt.Sprintf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 	// mode = mode + " "
 	// switch mode {
@@ -76,8 +79,9 @@ func VLog(mode, msg string) {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	// t := time.Now()
+	// tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
 	fmt.Printf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 	//fmt.Printf(VsLogMsg(mode, msg))
 	mode = mode + " "
@@ -97,8 +101,9 @@ func VLogMsg(mode, msg string) string {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	// t := time.Now()
+	// tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
 	return fmt.Sprintf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 	// mode = mode + " "
 	// switch mode {
@@ -118,8 +123,9 @@ func VLogErr(msg string) string {
 		fmt.Printf("Error getting Caller")
 	}
 	file := ExtractFileFromPath(path)
-	t := time.Now()
-	tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	// t := time.Now()
+	// tstr := fmt.Sprintf(t.Format("2006-01-02 15:04:05"))
+	tstr := "2025-07-13 12:00:00" //temporary hack to fix time issue in docker
 	return fmt.Sprintf("%s %s %s:%d - %s\n", tstr, mode, file, line, msg)
 }
 

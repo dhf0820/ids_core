@@ -93,7 +93,9 @@ func OpenDB() *MongoDB {
 	//dbURL := DbConnector.Server
 	dbURL := DBUrl() //os.Getenv("CORE_DB")
 	uri := dbURL
-	vsLog.Debug3("Opening database: " + uri + " using Company: " + os.Getenv("COMPANY"))
+	vsLog.Info("Opening MongoDB connection: " + dbURL)
+	vsLog.Info("Using CORE_DB: " + dbURL)
+	vsLog.Info("Opening database: " + uri + " using Company: " + os.Getenv("COMPANY"))
 	clientOptions := options.Client()
 	clientOptions.ApplyURI(uri)
 	clientOptions.SetMaxPoolSize(5)
