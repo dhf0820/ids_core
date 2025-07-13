@@ -1,6 +1,6 @@
 USER ?= dhf0820
 NS ?= dhf0820
-TAG ?= 250712.1
+TAG ?= 250713.50.0
 TEST ?= dhf0820
 PROD ?= vertisoft
 ARC ?= amd64
@@ -106,13 +106,18 @@ test_amd64:
 	docker push $(TEST)/$(IMAGE_NAME):$(VERSION)
 
 prod:
-	echo "Building for prod"
+	@echo "line: 109 Building for prod"
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(ARCH) $(GOBUILD) -o $(BINARY) -v
+	@echo "line: 111 Docker Build"
 	docker build -t $(PROD)/$(DOCKER_NAME):$(VERSION) -f Dockerfile_$(ARCH) .
-	imageName = $(PROD)/$(DOCKER_NAME):$(VERSION)
-	$echo "Pushing image: " $(imageName)
-	docker push imageName
-	#docker push $(PROD)/$(DOCKER_NAME):$(VERSION)
+	@echo "Line:113  creating buildImage " 
+	buildImage =  docker.io/$(PROD)/$(DOCKER_NAME):$(VERSION)
+	@echo "Line: 115 " buildImage 
+	imageName = "docker.io/$(PROD)/$(DOCKER_NAME):$(VERSION)"
+	@echo "line: 117  Pushing image: " $(buildImage)
+	docker push $(buildImage)
+
+	#@docker push $(PROD)/$(DOCKER_NAME):$(VERSION)
 
 # test:
 # 	CGO_ENABLED=0 GOOS=linux GOARCH=amd64 $(GOBUILD) -o $(LINUX_IMAGE_NAME) -v

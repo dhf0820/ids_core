@@ -1,5 +1,5 @@
-#docker service rmids_core
-make build TAG=250712.1
+#docker service rm vsids_core
+make prod TAG=250713.50.0
 docker stack deploy -c prod.yml vs
-docker service logs ids_core  -n all -f
+docker service logs vsids_core  -n all -f
 

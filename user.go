@@ -16,7 +16,6 @@ import (
 	//auth "github.com/dhf0820/authorize"
 	//jwt "github.com/dhf0820/jwToken"
 	jwt "github.com/dhf0820/golangJWT"
-	common "github.com/dhf0820/uc_common"
 
 	//"github.com/google/uuid"
 	nano_uuid "github.com/aidarkhanov/nanoid/v2"
@@ -92,7 +91,7 @@ type UserSummary struct {
 
 // }
 
-func Login(userName, password, ip string) (*common.User, error) {
+func Login(userName, password, ip string) (*User, error) {
 	var err error
 	//loginTime := time.Now()
 	// hpwd, err := HashPassword(password)
@@ -121,7 +120,7 @@ func Login(userName, password, ip string) (*common.User, error) {
 	//fmt.Printf("Using Filter: %v\n", filter)
 	vsLog.Debug2("CallingGetCollection: user")
 	collection, _ := GetCollection("user")
-	usr := &common.User{}
+	usr := &User{}
 	vsLog.Debug2(fmt.Sprintf("Calling FindOne: %v", filter))
 	result := collection.FindOne(context.TODO(), filter)
 	err = result.Err()
@@ -327,7 +326,7 @@ func CreateToken(ip, userName string, userId, fullName, role string, sessionId s
 // 	return nil
 //   }
 
-// func ExtractTokenMetadata(r *http.Request) (*common.AccessDetails, error) {
+// func ExtractTokenMetadata(r *http.Request) (*AccessDetails, error) {
 // 	authToken := r.Header.Get("Authorization")
 // 	token, err := VerifyTokenString(authToken)
 // 	if err != nil {
@@ -336,7 +335,7 @@ func CreateToken(ip, userName string, userId, fullName, role string, sessionId s
 // 	return GetTokenMetaData(token)
 // }
 
-// func GetTokenMetaData(token *jwt.Token) (*common.AccessDetails, error) {
+// func GetTokenMetaData(token *jwt.Token) (*AccessDetails, error) {
 // 	var err error
 // 	claims, ok := token.Claims.(jwt.MapClaims)
 // 	//if ok && token.Valid {
@@ -360,7 +359,7 @@ func CreateToken(ip, userName string, userId, fullName, role string, sessionId s
 // 		// 	  return nil, errors.New("exp not found in token")
 // 		//    }
 
-// 		return &common.AccessDetails{
+// 		return &AccessDetails{
 // 			AccessUuid: accessUuid,
 // 			SessionId:  sessionId,
 // 			UserId:     userId,
@@ -455,7 +454,7 @@ func (user *User) Insert() error {
 }
 
 func (user *User) Exists() bool {
-	u := &common.User{}
+	u := &User{}
 	filter := bson.M{"user_name": user.UserName}
 	collection, _ := GetCollection("user")
 	err := collection.FindOne(context.TODO(), filter).Decode(u)
@@ -546,12 +545,12 @@ func (user *User) GetActivePatient(destSysId string) (*ActivePatient, error) {
 	return activePatient, nil
 }
 
-func GetSystemSummary(id primitive.ObjectID) (*common.SystemSummary, error) {
+func GetSystemSummary(id primitive.ObjectID) (*SystemSummary, error) {
 	collection, _ := GetCollection("SystemConfig")
 	filter := bson.M{"_id": id}
 	//sysCfg := &SystemConfig{}
-	sysSum := &common.SystemSummary{}
-	// sys := &common.System{}
+	sysSum := &SystemSummary{}
+	// sys := &System{}
 	// err := collection.FindOne(context.TODO(), filter).Decode(sys)
 	// if err != nil {
 	// 	return nil, err
@@ -566,12 +565,12 @@ func GetSystemSummary(id primitive.ObjectID) (*common.SystemSummary, error) {
 	return sysSum, nil //vsLog.Errorf("SysSum: " + spew.Sdump(sysSum))
 }
 
-func GetSystem(id primitive.ObjectID) (*common.System, error) {
+func GetSystem(id primitive.ObjectID) (*System, error) {
 	collection, _ := GetCollection("SystemConfig")
 	filter := bson.M{"_id": id}
-	sysCfg := common.System{}
+	sysCfg := System{}
 	//sysCfg := &SystemConfig{}
-	sys := &common.System{}
+	sys := &System{}
 	err := collection.FindOne(context.TODO(), filter).Decode(sysCfg)
 	if err != nil {
 		return nil, err
@@ -585,12 +584,12 @@ func GetSystem(id primitive.ObjectID) (*common.System, error) {
 	return sys, nil
 }
 
-func GetFacility(id primitive.ObjectID) (*common.Facility, error) {
-	var systems []*common.SystemSummary
+func GetFacility(id primitive.ObjectID) (*Facility, error) {
+	var systems []*SystemSummary
 	collection, _ := GetCollection("facilities")
 	filter := bson.M{"_id": id}
-	sysFac := &common.Facility{}
-	fac := &common.Facility{}
+	sysFac := &Facility{}
+	fac := &Facility{}
 	err := collection.FindOne(context.TODO(), filter).Decode(sysFac)
 	if err != nil {
 		return nil, err
@@ -664,8 +663,8 @@ func GetUserById(uid string) (*User, error) {
 	return usr, err
 }
 
-func SystemsForFacility(sysFac *common.Facility) ([]*common.System, error) {
-	systems := []*common.System{}
+func SystemsForFacility(sysFac *Facility) ([]*System, error) {
+	systems := []*System{}
 	for _, sys := range sysFac.Systems {
 		sys, err := GetSystem(sys.ID)
 		if err != nil {

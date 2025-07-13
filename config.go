@@ -13,7 +13,6 @@ import (
 
 	//"github.com/davecgh/go-spew/spew"
 
-	common "github.com/dhf0820/uc_common"
 	vsLog "github.com/dhf0820/vslog"
 
 	//"github.com/sirupsen/logrus"
@@ -183,7 +182,7 @@ func GetSvcConfig(ctx context.Context, svcName, version, company string) (*Servi
 	return &srvConfig, err
 }
 
-// func GetSvrConfig(ctx context.Context, svcName, version, company string) (*common.Svr, error) {
+// func GetSvrConfig(ctx context.Context, svcName, version, company string) (*Svr, error) {
 // 	// fname := "/Users/dhf/work/roi/services/core_service/config/core_test.json"
 // 	// svcConfig, err := ConfigFromJsonFile(fname)
 // 	vsLog.Debug2(fmt.Sprintf("Name: %s, version: %s, company: %s", svcName, version, company))
@@ -210,7 +209,7 @@ func GetSvcConfig(ctx context.Context, svcName, version, company string) (*Servi
 // 	return &srvConfig, err
 // }
 
-func GetConnectorConfig(nameVersion string) (*common.ConnectorConfig, error) {
+func GetConnectorConfig(nameVersion string) (*ConnectorConfig, error) {
 	parts := strings.Split(nameVersion, ":")
 	name := parts[0]
 	if len(parts) == 1 {
@@ -225,7 +224,7 @@ func GetConnectorConfig(nameVersion string) (*common.ConnectorConfig, error) {
 	//filter := bson.D{bson.E{Key:"name", Value: svcName},bson.E{Key:"version", Value: version},
 	//	bson.E{Key:"customer.name", Value: company}}
 	filter := bson.D{bson.E{Key: "name", Value: name}, bson.E{Key: "version", Value: version}}
-	connConfig := common.ConnectorConfig{}
+	connConfig := ConnectorConfig{}
 	vsLog.Debug3(" --  Calling FindOne SvcConfig: " + fmt.Sprint(filter))
 	err = collection.FindOne(context.Background(), filter).Decode(&connConfig)
 	if err != nil {
@@ -320,7 +319,7 @@ func GetConnectorConfig(nameVersion string) (*common.ConnectorConfig, error) {
 //	return &svcConfig, err
 //}
 
-// func GetConnectorConfigById(id primitive.ObjectID) (*common.ConnectorConfig, error) {
+// func GetConnectorConfigById(id primitive.ObjectID) (*ConnectorConfig, error) {
 // 	vsLog.Debug3(" -- Connector Id: " + id.Hex())
 // 	collection, err := GetCollection("ConnectorConfig")
 // 	if err != nil {
@@ -330,7 +329,7 @@ func GetConnectorConfig(nameVersion string) (*common.ConnectorConfig, error) {
 //		//filter := bson.D{bson.E{Key:"name", Value: svcName},bson.E{Key:"version", Value: version},
 //		//	bson.E{Key:"customer.name", Value: company}}
 //		filter := bson.M{"_id": id}
-//		connConfig := common.ConnectorConfig{}
+//		connConfig := ConnectorConfig{}
 //		//fmt.Printf("Collection: %s\n", spew.Sdump(collection))
 //		vsLog.Info(fmt.Sprintf("Calling FindOne ConnectorConfig: %v", filter))
 //		err = collection.FindOne(context.Background(), filter).Decode(&connConfig)

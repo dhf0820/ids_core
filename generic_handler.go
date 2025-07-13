@@ -13,7 +13,6 @@ import (
 
 	//logging "github.com/dhf0820/uc_common/logging"
 
-	common "github.com/dhf0820/uc_common"
 	vsLog "github.com/dhf0820/vslog"
 	"github.com/gorilla/mux"
 	//m "github.com/dhf0820/ROIPrint/pkg/model"
@@ -67,8 +66,8 @@ func HealthCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(version)
 }
 
-func processStatusReport(r *http.Request) *common.StatusReport {
-	statusReport := common.StatusReport{}
+func processStatusReport(r *http.Request) *StatusReport {
+	statusReport := StatusReport{}
 	decoder := json.NewDecoder(r.Body).Decode(&statusReport)
 	if decoder != nil {
 		fmt.Printf("decoder: %s\n", decoder.Error())
