@@ -1,6 +1,6 @@
 USER ?= dhf0820
 NS ?= dhf0820
-TAG ?= 250713.0
+TAG ?= 250714.0
 TEST ?= dhf0820
 PROD ?= vertisoft
 ARC ?= amd64
