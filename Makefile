@@ -108,13 +108,13 @@ test_amd64:
 prod:
 	@echo "line: 109 Building for prod"
 	CGO_ENABLED=0 GOOS=linux GOARCH=$(ARCH) $(GOBUILD) -o $(BINARY) -v
-	@echo "line: 111 Docker Build"
+	#@echo "line: 111 Docker Build"
 	docker build -t $(PROD)/$(DOCKER_NAME):$(VERSION) -f Dockerfile_$(ARCH) .
-	@echo "Line:113  creating buildImage " 
+	#@echo "Line:113  creating buildImage " 
 	buildImage =  docker.io/$(PROD)/$(DOCKER_NAME):$(VERSION)
-	@echo "Line: 115 " buildImage 
-	imageName = "docker.io/$(PROD)/$(DOCKER_NAME):$(VERSION)"
-	@echo "line: 117  Pushing image: " $(buildImage)
+	#@echo "Line: 115 " buildImage 
+	#imageName = "docker.io/$(PROD)/$(DOCKER_NAME):$(VERSION)"
+	#@echo "line: 117  Pushing image: " $(buildImage)
 	docker push $(buildImage)
 
 	#@docker push $(PROD)/$(DOCKER_NAME):$(VERSION)

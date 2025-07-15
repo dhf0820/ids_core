@@ -40,6 +40,8 @@ import (
 
 var dbUrl = "mongodb+srv://dhfadmin:Sacj0nhati@cluster1.24b12.mongodb.net/test?retryWrites=true&w=majority"
 
+//var dbUrl = "mongodb+srv://dhfadmin:Sacj0nhati@cluster1.24b12.mongodb.net/demo?retryWrites=true&w=majority"
+
 func TestCreateIndexTime(t *testing.T) {
 	//t.Parallel()
 	godotenv.Load(".env.core_test")

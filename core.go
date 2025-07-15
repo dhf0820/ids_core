@@ -43,7 +43,7 @@ func InitCoreFromEnv(envName string) (*ServiceConfig, error) {
 func InitCore(name, version, company string) (*ServiceConfig, error) {
 	vsLog.Debug2(fmt.Sprintf("Starting with name: %s, version: %s, company: %s", name, version, company))
 	vsLog.Debug2("Setting SYSTEMDBNAME: " + company)
-	os.Setenv("SYSTEMDBNAME", company)
+	os.Setenv(" ", company)
 	//dbName := os.Getenv("CORE_DB")
 	//fmt.Printf("\n--InitCore:47 -- Opening Database: %s  \n", os.Getenv("CORE_DB"))
 	startTime := time.Now()
